@@ -2,7 +2,7 @@
 
 ## Setup
 npm install
-quasar dev`
+quasar dev
 
 ## Features
 - Add / delete tasks
