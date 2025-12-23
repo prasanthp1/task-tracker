@@ -1,55 +1,28 @@
 <template>
-  <q-page class="row items-center justify-evenly">
-    <example-component
-      title="Example component"
-      active
-      :todos="todos"
-      :meta="meta"
-    ></example-component>
+  <q-page class="container">
+    <TaskHeader :status-bar="statusBar" />
+    <TaskContainer class="q-mt-md" />
+    <q-card flat class="shadow-5 card-border q-mt-md"> <router-view /></q-card>
   </q-page>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-import type { Todo, Meta } from 'components/models';
-import ExampleComponent from 'components/ExampleComponent.vue';
+<script setup lang="ts">
+import type { StatusItem } from 'src/components/models';
+import TaskContainer from 'src/components/TaskContainer.vue';
+import TaskHeader from 'src/components/TaskHeader.vue';
+import { useTaskStore } from 'src/stores/task-store';
+import { computed } from 'vue';
 
-export default defineComponent({
-  name: 'IndexPage',
+const taskStore = useTaskStore();
+const statusBar = computed<StatusItem[]>(() => {
+  const total = taskStore.tasks.length;
+  const completed = taskStore.tasks.filter((t) => t.completed).length;
+  const pending = taskStore.tasks.filter((t) => !t.completed).length;
 
-  components: {
-    ExampleComponent,
-  },
-
-  setup() {
-    const todos = ref<Todo[]>([
-      {
-        id: 1,
-        content: 'ct1',
-      },
-      {
-        id: 2,
-        content: 'ct2',
-      },
-      {
-        id: 3,
-        content: 'ct3',
-      },
-      {
-        id: 4,
-        content: 'ct4',
-      },
-      {
-        id: 5,
-        content: 'ct5',
-      },
-    ]);
-
-    const meta = ref<Meta>({
-      totalCount: 1200,
-    });
-
-    return { todos, meta };
-  },
+  return [
+    { label: 'Total Tasks', count: total },
+    { label: 'Completed', count: completed },
+    { label: 'Pending', count: pending },
+  ];
 });
 </script>
