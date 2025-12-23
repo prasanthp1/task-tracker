@@ -1,40 +1,17 @@
-# Task Tracker (task-tracker)
+# Task Tracker (Vue 3 + Quasar)
 
-A Quasar Project
-
-## Install the dependencies
-
-```bash
-yarn
-# or
+## Setup
 npm install
-```
+quasar dev`
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
+## Features
+- Add / delete tasks
+- Mark completed
+- Filter by status
+- Persist data in LocalStorage
 
-```bash
-quasar dev
-```
-
-### Lint the files
-
-```bash
-yarn lint
-# or
-npm run lint
-```
-
-### Format the files
-
-```bash
-yarn format
-# or
-npm run format
-```
-
-### Build the app for production
-
-```bash
+## Tech Stack
+Vue 3, Quasar, TypeScript, Pinia
 quasar build
 ```
 
